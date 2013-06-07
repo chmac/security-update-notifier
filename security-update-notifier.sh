@@ -16,4 +16,5 @@ if [ $security != "0" ]
 then
 	# Generate some output which will be piped to cron
 	/usr/lib/update-notifier/apt-check --human-readable
+	/usr/lib/update-notifier/apt-check --package-names
 fi
