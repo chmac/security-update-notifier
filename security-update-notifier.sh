@@ -11,13 +11,14 @@ fi
 
 # Get the number of security updates (after the colon)
 security=$(echo "$updates" | cut -d ";" -f 2)
+regular=$(echo "$updates" | cut -d ";" -f 1)
 
 if [ $security != "0" ]
 then
 	# Generate some output which will be piped to cron
-	/usr/lib/update-notifier/apt-check --human-readable
-	echo
-	echo "Packages pending upgrade:"
-	/usr/lib/update-notifier/apt-check --package-names
-	echo
+	summary=$(/usr/lib/update-notifier/apt-check --human-readable)
+	middle=$'\n\n'"Packages pending upgrade:"$'\n'
+	details=$(/usr/lib/update-notifier/apt-check --package-names)
+	message="$summary$middle$details"
+	echo "$message" | mail -s "$(hostname -s) $security security updates ($regular updates)" $(whoami)
 fi
