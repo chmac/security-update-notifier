@@ -12,3 +12,8 @@ Install
 -----
 
 Copy the file security-udpate-notifier.sh to your local filesystem and add it to cron.
+
+Improvements
+----
+
+This script is ten line simple. It could be dramatically improved. See the tickets for ideas, pull requests welcome.
