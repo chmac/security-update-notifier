@@ -18,7 +18,7 @@ then
 	# Generate some output which will be piped to cron
 	summary=$(/usr/lib/update-notifier/apt-check --human-readable)
 	middle=$'\n\n'"Packages pending upgrade:"$'\n'
-	details=$(/usr/lib/update-notifier/apt-check --package-names)
+	details=$((/usr/lib/update-notifier/apt-check --package-names) 2>&1)
 	message="$summary$middle$details"
 	echo "$message" | mail -s "$(hostname -s) $security security updates ($regular updates)" $(whoami)
 fi
